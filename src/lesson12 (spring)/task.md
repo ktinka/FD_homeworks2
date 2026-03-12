@@ -8,7 +8,7 @@
 Создайте 3 потока с именами "Thread-A", "Thread-B", "Thread-C". Каждый поток должен вывести своё имя 5 раз с задержкой 500мс.
 
 ```kotlin
-import kotlin.concurrent.thread
+//import kotlin.concurrent.thread
 
 object CreateThreads {
     fun run(): List<Thread> {
@@ -129,7 +129,6 @@ fun main() {
 Создайте пример deadlock с двумя ресурсами и двумя потоками. Затем исправьте его.
 
 ```kotlin
-import kotlin.concurrent.thread
 object Deadlock {
     private val resource1 = Any()
     private val resource2 = Any()
@@ -212,8 +211,8 @@ fun main() {
 Используя `Executors.newFixedThreadPool(4)`, выполните 20 задач. Каждая задача выводит свой номер и имя потока, затем спит 200мс.
 
 ```kotlin
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
+//import java.util.concurrent.Executors
+//import java.util.concurrent.TimeUnit
 object ExecutorServiceExample {
     fun run(): List<String> {
         val executor = Executors.newFixedThreadPool(4)
@@ -248,9 +247,8 @@ fun main() {
 Используя ExecutorService и `Callable`, параллельно вычислите факториалы чисел от 1 до 10. Соберите результаты через `Future.get()`.
 
 ```kotlin
-import java.math.BigInteger
-import java.util.concurrent.Executors
-import java.util.concurrent.Future
+//import java.math.BigInteger
+//import java.util.concurrent.Future
 
 object FutureFactorial {
     fun run(): Map<Int, BigInteger> {
@@ -299,8 +297,8 @@ fun main() {
 Используя `runBlocking` и `launch`, запустите 3 корутины, каждая из которых выводит своё имя 5 раз с `delay(500)`.
 
 ```kotlin
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+//import kotlinx.coroutines.*
+//import kotlin.coroutines.CoroutineContext
 
 object CoroutineLaunch {
     fun run(): List<String> = runBlocking {
@@ -333,8 +331,6 @@ fun main() {
 Используя `async`, параллельно вычислите сумму чисел от 1 до 1_000_000, разбив на 4 части. Соберите результаты через `await()`.
 
 ```kotlin
-import kotlinx.coroutines.*
-
 object AsyncAwait {
     suspend fun run(): Long = coroutineScope {
         val total = 1_000_000L
@@ -370,8 +366,6 @@ fun main() {
 Создайте корутину, которая запускает 5 дочерних корутин. Если одна из них падает с исключением, все остальные должны отмениться.
 
 ```kotlin
-import kotlinx.coroutines.*
-
 object StructuredConcurrency {
     suspend fun run(failingCoroutineIndex: Int): Int = coroutineScope {
         val results = mutableListOf<Int>()
@@ -420,10 +414,9 @@ fun main() {
 Используя `withContext(Dispatchers.IO)`, прочитайте содержимое 3 файлов параллельно и объедините результаты.
 
 ```kotlin
-import kotlinx.coroutines.*
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import java.io.File
+//import kotlinx.coroutines.sync.Mutex
+//import kotlinx.coroutines.sync.withLock
+//import java.io.File
 
 object WithContextIO {
     suspend fun run(filePaths: List<String>): Map<String, String> = coroutineScope {
@@ -488,12 +481,8 @@ fun main() {
 5. В конце вывести статистику: общее время, количество успешных/неуспешных загрузок
 
 ```kotlin
-import kotlinx.coroutines.*
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import java.io.File
-import java.net.URL
-import java.time.Instant
+//import java.net.URL
+//import java.time.Instant
 
 data class DownloadStats(
     val totalTime: Long,
