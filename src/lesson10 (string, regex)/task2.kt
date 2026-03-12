@@ -113,9 +113,12 @@ class DeliveryAnalyzer {
         val brokenLines = mutableListOf<String>()
 
         logs.forEach { line ->
-            when (val result = normalizer.normalize(line)) {
-                is res -> validEvents.add(result.getOrThrow())
-                is Result.Failure -> brokenLines.add(line)
+            val result = normalizer.normalize(line)
+            val value = result.getOrNull()
+            if (value != null) {
+                validEvents.add(value)
+            } else {
+                brokenLines.add(line)
             }
         }
 
