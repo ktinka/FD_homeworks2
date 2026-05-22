@@ -15,13 +15,16 @@ package homework
  * 2. Исправьте метод `transfer()` так, чтобы дедлок был невозможен
  * 3. Убедитесь, что все тесты проходят
  */
-class BankAccount(val id: String, var balance: Int) {
 
+// Решение - всегда блокируем счета в одинаковом порядке
+class BankAccount(val id: String, var balance: Int) {
     fun transfer(to: BankAccount, amount: Int) {
-        synchronized(this) {
+        val firstLock = if (id.hashCode() < to.id.hashCode()) this else to
+        val secondLock = if (id.hashCode() < to.id.hashCode()) to else this
+        
+        synchronized(firstLock) {
             Thread.sleep(10)
-            
-            synchronized(to) {
+            synchronized(secondLock) {
                 if (balance >= amount) {
                     balance -= amount
                     to.balance += amount
